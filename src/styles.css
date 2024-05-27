@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+.w-md-25 {
+    width: 25%;
+}
+
+@media (max-width: 767px) {
+  .w-md-25 {
+    width: 100%;
+  }
+}
+
