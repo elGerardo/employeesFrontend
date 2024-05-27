@@ -1,9 +1,11 @@
-<div class="d-flex">
+<app-loader *ngIf="isLoading"></app-loader>
+<app-toast *ngIf="showToast" [message]="toastMessage" [customClass]="toastClass" [icon]="toastIcon"  [delay]="1000"></app-toast>
+<div class="d-flex container mt-4">
     <a class="text-decoration-none text-dark" style="font-size: 2rem;" routerLink="/"><i
             class="bi bi-arrow-left-short"></i></a>
     <h2 class="mt-2 ms-1">Employee</h2>
 </div>
-<app-form (formSubmit)="handleFormSubmit">
+<app-form (formSubmit)="handleFormSubmit" class="container">
     <div>
         <p class="fs-6 fw-bold mb-0">Personal Info</p>
         <p class="fs-6 text-secondary">Fill up the employee's personal info</p>

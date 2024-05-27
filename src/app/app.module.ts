@@ -7,8 +7,11 @@ import { TableComponent } from './components/table/table.component';
 import { HttpClientModule } from '@angular/common/http';
 import { EmployeeComponent } from './pages/employee/employee.component';
 import { AppRoutingModule } from './app-routing.module';
-import { WelcomeComponent } from './welcome/welcome.component';
+import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { FormComponent } from './components/form/form.component';
+import { ToastComponent } from './components/toast/toast.component';
+import { LoaderComponent } from './components/loader/loader.component';
+import { EmptyStateComponent } from './components/empty-state/empty-state.component';
 
 @NgModule({
   declarations: [
@@ -16,13 +19,16 @@ import { FormComponent } from './components/form/form.component';
     TableComponent,
     EmployeeComponent,
     WelcomeComponent,
-    FormComponent
+    FormComponent,
+    ToastComponent,
+    LoaderComponent,
+    EmptyStateComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -17,6 +17,11 @@ export class EmployeeComponent implements OnInit {
   job_title: string = ""
   errors: { [key: string]: Array<string> } = {}
   user_id: string = ""
+  showToast: boolean = false;
+  isLoading: boolean = false;
+  toastMessage: string = "Employee stored successfully!"
+  toastClass: string = "bg-success"
+  toastIcon: string = "bi bi-cloud-check"
 
   constructor(private userService: UserService, private route: ActivatedRoute) { }
 
@@ -33,6 +38,11 @@ export class EmployeeComponent implements OnInit {
           this.job_title = data.job_title;
           this.submitType = "update";
           this.user_id = params.id;
+        }, _error => {
+          this.toastIcon = "bi bi-exclamation-triangle"
+          this.toastClass = "bg-danger"
+          this.toastMessage = "An error occurred while fetching the employee"
+          this.controlShowToast(true)
         });
       }
     });
@@ -40,6 +50,7 @@ export class EmployeeComponent implements OnInit {
 
   handleFormSubmit(event: Event) {
     event.preventDefault();
+    this.controlShowToast(true)
     const data = {
       name: this.name,
       last_name: this.last_name,
@@ -50,23 +61,55 @@ export class EmployeeComponent implements OnInit {
     }
 
     if (this.submitType === "store") {
-      this.userService.store(data).subscribe(response => {
-        console.log(response);
+      this.userService.store(data).subscribe(_response => {
+        this.toastClass = "bg-success"
+        this.toastIcon = "bi bi-cloud-check"
+        this.toastMessage = "Employee stored successfully!"
+        this.controlShowToast(true)
+        setTimeout(() => { this.showToast = false }, 3000)
+        this.name = ""
+        this.last_name = ""
+        this.company = ""
+        this.area = ""
+        this.department = ""
+        this.job_title = ""
       }, error => {
         if (error.status === 422) {
           this.errors = error.error.errors
+        } else {
+          this.toastIcon = "bi bi-exclamation-triangle"
+          this.toastClass = "bg-danger"
+          this.toastMessage = "An error occurred while storing the employee"
+          this.controlShowToast(true)
         }
       });
       return
     }
 
-    this.userService.update(this.user_id, data).subscribe(response => {
-      console.log(response);
+    this.userService.update(this.user_id, data).subscribe(_response => {
+      this.toastClass = "bg-success"
+      this.toastIcon = "bi bi-cloud-check"
+      this.toastMessage = "Employee updated successfully!"
+      this.controlShowToast(true)
     }, error => {
       if (error.status === 422) {
         this.errors = error.error.errors
+      } else {
+        this.toastIcon = "bi bi-exclamation-triangle"
+        this.toastClass = "bg-danger"
+        this.toastMessage = "An error occurred while updating the employee"
+        this.controlShowToast(true)
       }
     });
+  }
+
+  controlShowToast(value: boolean) {
+    if(value) {
+      this.showToast = value
+      setTimeout(() => { this.showToast = !value }, 3000)
+      return
+    }
+    this.showToast = value;
   }
 
 }
