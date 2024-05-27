@@ -9,7 +9,7 @@
       <td *ngFor="let rowOrder of rowsOrder">
         <ng-container *ngIf="rowOrder != 'actions'">{{row[rowOrder]}}</ng-container>
         <ng-container *ngIf="rowOrder == 'actions'">
-          <button *ngFor="let action of actions" class="{{action.class}}" (click)="action.action(row)">
+          <button *ngFor="let action of actions" class="{{action.class}}" (click)="handleAction(action.action, row)">
             <i [class]="action.icon"></i> {{action.text}}
           </button>
         </ng-container>

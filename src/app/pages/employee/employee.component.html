@@ -1,1 +1,47 @@
-<p>employee works!</p>
+<div class="d-flex">
+    <a class="text-decoration-none text-dark" style="font-size: 2rem;" routerLink="/"><i
+            class="bi bi-arrow-left-short"></i></a>
+    <h2 class="mt-2 ms-1">Employee</h2>
+</div>
+<app-form (formSubmit)="handleFormSubmit">
+    <div>
+        <p class="fs-6 fw-bold mb-0">Personal Info</p>
+        <p class="fs-6 text-secondary">Fill up the employee's personal info</p>
+        <div class="d-md-flex">
+            <div class="w-100 mb-3">
+                <label for="name">Name<i class="bi bi-asterisk text-danger ms-1 position-absolute" style="font-size: 0.50rem;"></i></label>
+                <input class="form-control w-100 me-md-2" placeholder="Name" name="name" id="name" [(ngModel)]="name" />
+                <span *ngIf="errors['name'] != null" class="text-danger">{{errors['name']}}</span>
+            </div>
+            <div class="w-100">
+                <label for="last_name">Last Name<i class="bi bi-asterisk text-danger ms-1 position-absolute" style="font-size: 0.50rem;"></i></label>
+                <input class="form-control w-100 ms-md-2" placeholder="Last Name" name="last_name" id="last_name"
+                    [(ngModel)]="last_name" />
+                <span *ngIf="errors['last_name'] != null" class="text-danger">{{errors['last_name']}}</span>
+            </div>
+        </div>
+        <p class="fs-6 fw-bold mb-0 mt-3">Job Info</p>
+        <p class="fs-6 text-secondary">Fill up the employee's job info</p>
+
+        <label for="company">Company<i class="bi bi-asterisk text-danger ms-1 position-absolute" style="font-size: 0.50rem;"></i></label>
+        <input class="form-control" placeholder="Company" name="company" id="company" [(ngModel)]="company" />
+        <span *ngIf="errors['company'] != null" class="text-danger d-block">{{errors['company']}}</span>
+
+        <label for="area" class="mt-3">Area<i class="bi bi-asterisk text-danger ms-1 position-absolute" style="font-size: 0.50rem;"></i></label>
+        <input class="form-control" placeholder="Area" name="area" id="area" [(ngModel)]="area" />
+        <span *ngIf="errors['area'] != null" class="text-danger d-block">{{errors['area']}}</span>
+
+        <label for="area" class="mt-3">Department<i class="bi bi-asterisk text-danger ms-1 position-absolute" style="font-size: 0.50rem;"></i></label>
+        <input class="form-control" placeholder="Department" name="department" id="department" [(ngModel)]="department" />
+        <span *ngIf="errors['department'] != null" class="text-danger d-block">{{errors['department']}}</span>
+
+        <label for="area" class="mt-3">Job Title<i class="bi bi-asterisk text-danger ms-1 position-absolute" style="font-size: 0.50rem;"></i></label>
+        <input class="form-control" placeholder="Job Title" name="job_title" id="job_title" [(ngModel)]="job_title" />
+        <span *ngIf="errors['job_title'] != null" class="text-danger d-block">{{errors['job_title']}}</span>
+
+    </div>
+    <div class="d-flex flex-row-reverse mt-3">
+        <button class="btn btn-primary" type="submit" (click)="handleFormSubmit($event)">Save</button>
+        <a class="btn btn-outline-light text-secondary me-2" type="reset" routerLink="/">Cancel</a>
+    </div>
+</app-form>
