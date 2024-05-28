@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
-const baseUrl = environment.employees_base_url || 'http://localhost/api';
+const baseUrl = environment.employees_base_url;
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class UserService {
 
   getUsers(query: string) {
     return this.httpClient.get(
-      `${environment.employees_base_url}/user?${query}`,
+      `${baseUrl}/user?${query}`,
       {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
       }
@@ -22,7 +22,7 @@ export class UserService {
 
   find(id: string) {
     return this.httpClient.get(
-      `${environment.employees_base_url}/user/${id}`,
+      `${baseUrl}/user/${id}`,
       {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
       }
@@ -31,21 +31,21 @@ export class UserService {
 
   store(data: object) {
     return this.httpClient.post(
-      `${environment.employees_base_url}/user`,
+      `${baseUrl}/user`,
       data
     )
   }
 
   update(id: string, data: object) {
     return this.httpClient.post(
-      `${environment.employees_base_url}/user/${id}`,
+      `${baseUrl}/user/${id}`,
       data
     )
   }
 
   destroy(id: string) {
     return this.httpClient.delete(
-      `${environment.employees_base_url}/user/${id}`,
+      `${baseUrl}/user/${id}`,
       {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
       }
