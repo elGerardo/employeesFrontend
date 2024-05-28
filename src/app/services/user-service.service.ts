@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import * as EnvJson from 'env.json';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +10,8 @@ export class UserService {
 
 
   getUsers(query: string) {
-    console.log(`${EnvJson.EMPLOYEE_BASE_URL}/user?${query}`)
     return this.httpClient.get(
-      `${EnvJson.EMPLOYEE_BASE_URL}/user?${query}`,
+      `${environment.employees_base_url}/user?${query}`,
       {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
       }
@@ -21,7 +20,7 @@ export class UserService {
 
   find(id: string) {
     return this.httpClient.get(
-      `${EnvJson.EMPLOYEE_BASE_URL}/user/${id}`,
+      `${environment.employees_base_url}/user/${id}`,
       {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
       }
@@ -30,21 +29,21 @@ export class UserService {
 
   store(data: object) {
     return this.httpClient.post(
-      `${EnvJson.EMPLOYEE_BASE_URL}/user`,
+      `${environment.employees_base_url}/user`,
       data
     )
   }
 
   update(id: string, data: object) {
     return this.httpClient.post(
-      `${EnvJson.EMPLOYEE_BASE_URL}/user/${id}`,
+      `${environment.employees_base_url}/user/${id}`,
       data
     )
   }
 
   destroy(id: string) {
     return this.httpClient.delete(
-      `${EnvJson.EMPLOYEE_BASE_URL}/user/${id}`,
+      `${environment.employees_base_url}/user/${id}`,
       {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
       }
