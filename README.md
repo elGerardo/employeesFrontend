@@ -28,7 +28,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Running with Docker
 
-Run the below commands: 
-docker build -t employees-app .
+Run the below commands: <br />
+docker build -t employees-app . <br />
 docker run -p 4201:4200 employees-app
 
