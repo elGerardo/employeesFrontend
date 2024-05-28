@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import * as EnvJson from 'env.json';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +9,10 @@ export class UserService {
   constructor(private httpClient: HttpClient) { }
 
 
-  getUsers() {
+  getUsers(query: string) {
+    console.log(`${EnvJson.EMPLOYEE_BASE_URL}/user?${query}`)
     return this.httpClient.get(
-      'http://localhost/api/user',
+      `${EnvJson.EMPLOYEE_BASE_URL}/user?${query}`,
       {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
       }
@@ -21,7 +21,7 @@ export class UserService {
 
   find(id: string) {
     return this.httpClient.get(
-      `http://localhost/api/user/${id}`,
+      `${EnvJson.EMPLOYEE_BASE_URL}/user/${id}`,
       {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
       }
@@ -30,27 +30,21 @@ export class UserService {
 
   store(data: object) {
     return this.httpClient.post(
-      'http://localhost/api/user',
-      data,
-      {
-        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-      }
+      `${EnvJson.EMPLOYEE_BASE_URL}/user`,
+      data
     )
   }
 
   update(id: string, data: object) {
-    return this.httpClient.put(
-      `http://localhost/api/user/${id}`,
-      data,
-      {
-        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-      }
+    return this.httpClient.post(
+      `${EnvJson.EMPLOYEE_BASE_URL}/user/${id}`,
+      data
     )
   }
 
   destroy(id: string) {
     return this.httpClient.delete(
-      `http://localhost/api/user/${id}`,
+      `${EnvJson.EMPLOYEE_BASE_URL}/user/${id}`,
       {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
       }

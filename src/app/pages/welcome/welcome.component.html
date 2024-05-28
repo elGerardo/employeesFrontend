@@ -1,22 +1,33 @@
-<app-toast *ngIf="showToast" [message]="toastMessage" [customClass]="toastClass" [icon]="toastIcon" [delay]="1000"></app-toast>
+<app-toast *ngIf="showToast" [message]="toastMessage" [customClass]="toastClass" [icon]="toastIcon"
+    [delay]="1000"></app-toast>
 <app-loader *ngIf="isLoading"></app-loader>
-<div class="container mt-4">
+<div class="container pt-4">
     <h2>Employees Detail</h2>
     <div class="d-md-flex">
-        <input class="form-control w-md-25 mb-3" placeholder="Search..." />
-        <div class="d-flex ms-sm-3 mb-3 flex-row-reverse">
+        <app-dropdown [options]="[
+        {'label':'No.', 'value': 'id'},
+        {'label':'Name', 'value': 'name'},
+        {'label':'Company', 'value': 'company'},
+        {'label':'Area', 'value': 'area'},
+        {'label':'Department', 'value': 'Department'},
+        {'label':'Job Title', 'value': 'job_title'},
+        {'label':'Status', 'value': 'status'},
+        {'label': 'Created At', 'value': 'created_at'}]" (optionSelected)="handleOptionSelected($event)"></app-dropdown>
+        <input type="text" class="form-control w-md-25 mb-3 i-rounded-md-end" placeholder="Search..." [formControl]="searchControl" />
+        <div class="d-flex ms-md-3 mb-3">
             <a class="btn btn-primary" routerLink="/employees"><i class="bi bi-person-fill-add"></i>
                 Add Employee</a>
         </div>
     </div>
-    <div *ngIf="users.length > 0">
-    <app-table [headers]="['No.', 'Name', 'Last Name', 'Company', 'Area', 'Department', 'Job Title', 'Actions']"
-        [rows]="users"
-        [rowsOrder]="['id', 'name', 'last_name', 'company', 'area', 'department', 'job_title', 'actions']"
-        [actions]="[
+    <div *ngIf="users.length != null && users.length > 0">
+        <app-table [headers]="['No.', 'Name', 'Company', 'Area', 'Department', 'Job Title', 'Status', 'Created At', 'Actions']" [rows]="users"
+            [rowsOrder]="['id', 'full_name', 'company', 'area', 'department', 'job_title', 'status', 'created_at', 'actions']"
+            [actions]="[
         {icon: 'bi bi-pencil-fill', action: 'update', 'text': 'Edit', 'class': 'btn btn-info me-2 btn-sm text-white rounded-pill'},
         {icon: 'bi bi-trash-fill', action: 'delete', 'text': 'Delete', 'class': 'btn btn-danger me-2 btn-sm rounded-pill'}]" (update)="handleUpdate($event)" (delete)="handleDelete($event)">
-    </app-table>
+        </app-table>
     </div>
-    <app-empty-state *ngIf="users.length === 0" title="No Employees" message="There are no employees registered yet." icon="bi bi-people-fill text-light bg-secondary rounded-circle px-4 py-3" customClass="mt-5"></app-empty-state>
+    <app-empty-state *ngIf="users.length != undefined && users.length === 0 && isLoading == false" title="No Employees"
+        message="There are no employees registered yet."
+        icon="bi bi-people-fill text-light bg-secondary rounded-circle px-4 py-3" customClass="mt-5"></app-empty-state>
 </div>

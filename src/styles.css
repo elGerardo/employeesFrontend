@@ -5,9 +5,33 @@
     width: 25%;
 }
 
+.w-md-50 {
+  width: 50%;
+}
+
+.i-rounded-md-start {
+  border-radius: .375rem 0 0 .375rem !important;
+}
+
+.i-rounded-md-end {
+  border-radius: 0 .375rem .375rem 0 !important;
+}
+
 @media (max-width: 767px) {
   .w-md-25 {
     width: 100%;
+  }
+
+  .w-md-50 {
+    width: 100%;
+  }
+
+  .i-rounded-md-start {
+    border-radius: .375rem !important;
+  }
+
+  .i-rounded-md-end {
+    border-radius: .375rem !important;
   }
 }
 

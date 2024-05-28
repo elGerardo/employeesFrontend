@@ -13,6 +13,7 @@
     "target": "es2015",
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
+    "resolveJsonModule": true,
     "typeRoots": [
       "node_modules/@types"
     ],

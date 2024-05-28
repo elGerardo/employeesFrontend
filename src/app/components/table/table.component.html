@@ -1,19 +1,28 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col" *ngFor="let header of headers">{{header}}</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let row of rows">
-      <td *ngFor="let rowOrder of rowsOrder">
-        <ng-container *ngIf="rowOrder != 'actions'">{{row[rowOrder]}}</ng-container>
-        <ng-container *ngIf="rowOrder == 'actions'">
-          <button *ngFor="let action of actions" class="{{action.class}}" (click)="handleAction(action.action, row)">
-            <i [class]="action.icon"></i> {{action.text}}
-          </button>
-        </ng-container>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div style="overflow-x: auto;">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col" *ngFor="let header of headers">{{header}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of rows">
+        <td *ngFor="let rowOrder of rowsOrder">
+          <ng-container
+            *ngIf="rowOrder != 'actions' && rowOrder != 'created_at' && rowOrder != 'status'">{{row[rowOrder]}}</ng-container>
+          <ng-container *ngIf="rowOrder == 'actions'">
+            <button *ngFor="let action of actions" class="{{action.class}}" (click)="handleAction(action.action, row)">
+              <span class="d-flex"><i [class]="action.icon"></i> <span class="ms-1">{{action.text}}</span></span>
+            </button>
+          </ng-container>
+          <ng-container *ngIf="rowOrder == 'created_at'">{{formatDate(row[rowOrder])}}
+          </ng-container>
+          <ng-container *ngIf="rowOrder == 'status'">
+            <span *ngIf="row[rowOrder] === 'Active'" class="badge rounded-pill text-bg-success">{{row[rowOrder]}}</span>
+            <span *ngIf="row[rowOrder] === 'Inactive'" class="badge rounded-pill text-bg-secondary">{{row[rowOrder]}}</span>
+          </ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
