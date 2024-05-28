@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
+const baseUrl = environment.employees_base_url || 'http://localhost/api';
+
 @Injectable({
   providedIn: 'root'
 })
